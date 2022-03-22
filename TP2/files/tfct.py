@@ -4,8 +4,8 @@ import numpy as np
 
 
 class TFCT:
-    n_win = 20
-    n_hop = 10
+    n_win = 2000
+    n_hop = 1000
     n_fft = n_win
     window_type = "hamming"
 
