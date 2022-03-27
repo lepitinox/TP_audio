@@ -55,7 +55,7 @@ class TFCT:
             self.windowed_trames_specter.append(self._apply_fft(i))
 
     def _apply_fft(self, signal):
-        data = np.fft.fft(signal,int(self.n_fft))
+        data = np.fft.fft(signal, n=int(self.n_fft))
         axis = np.fft.fftfreq(int(self.n_fft), 1 / self.freq)
         return data, axis
 
