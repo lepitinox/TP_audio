@@ -1,6 +1,7 @@
 from scipy.io import wavfile
 import pandas as pd
 import numpy as np
+import sounddevice as sd
 
 
 class TFCT:
@@ -55,19 +56,19 @@ class TFCT:
 
     def _apply_fft(self, signal):
         data = np.fft.fft(signal)
-        axis = np.fft.fftfreq(len(signal), 1 / self.freq)
+        axis = np.fft.fftfreq(int(self.n_fft), 1 / self.freq)
         return data, axis
 
     def build_xmat(self):
         temp = []
         spec_len = len(self.windowed_trames_specter[0][0])
-        if spec_len%2:
+        if spec_len % 2:
             for i in range(len(self.windowed_trames_specter)):
-                temp.append(abs(self.windowed_trames_specter[i][0][:spec_len//2+1]))
+                temp.append(abs(self.windowed_trames_specter[i][0][:spec_len // 2 + 1]))
         else:
             for i in range(len(self.windowed_trames_specter)):
                 try:
-                    temp.append(abs(self.windowed_trames_specter[i][0][:int(spec_len/2)]))
+                    temp.append(abs(self.windowed_trames_specter[i][0][:int(spec_len / 2)]))
                 except Exception as e:
 
                     print(spec_len)
@@ -104,3 +105,6 @@ class TFCT:
         for i in range(len(self.trames)):
             df[f"{i}"] = self.trames[i]
         df.plot().show()
+
+    def play_sound(self):
+        sd.play(self.x_vect, self.freq)

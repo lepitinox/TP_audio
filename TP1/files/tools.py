@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 try:
     import plotly.express as px
 
-    use_plotly = False
+    use_plotly = True
 except Exception as e:
 
     use_plotly = False
