@@ -40,8 +40,8 @@ class ITFCT:
         b = basedf.T
         b = b.apply(lambda x: x.shift(int(x.name) * self.nhop))
         b = b.fillna(0)
-        b.T.abs().sum().plot()
-        plt.show()
+        b = b.sum()
+        return b
 
     def offset_trams(self):
         """
