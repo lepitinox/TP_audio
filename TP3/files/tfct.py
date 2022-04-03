@@ -106,5 +106,8 @@ class TFCT:
             df[f"{i}"] = self.trames[i]
         df.plot().show()
 
-    def play_sound(self):
-        sd.play(self.x_vect, self.freq)
+    def play_sound(self,nb_point=None):
+        if nb_point is None:
+            sd.play(self.x_vect, self.freq)
+        else:
+            sd.play(self.x_vect[:nb_point], self.freq)
